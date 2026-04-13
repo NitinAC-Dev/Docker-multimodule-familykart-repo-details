@@ -17,10 +17,12 @@ spring:
       group-id: order-service-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer  # ← changed
       properties:
-        "[spring.json.trusted.packages]": "*"
-        "[spring.json.use.type.headers]": false
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer  # ← added
+        spring.json.value.default.type: org.familykart.com.shared.model.ResponseMessage  # ← added
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
 
 topicName: order-events
 reduceStockTopicName: reduce-stock-events
