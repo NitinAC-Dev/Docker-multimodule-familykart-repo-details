@@ -1,0 +1,4 @@
+jwt:
+  secret: FamilyKartSuperSecretKeyForJWT2024
+  expiration: 900000
+  refresh-expiration: 604800000
